@@ -37,7 +37,7 @@ jobs:
       - name: Sync Notion work item
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          NOTION_DATA_SOURCE_ID: ${{ vars.CLAIMGRAPH_NOTION_DATA_SOURCE_ID }}
+          NOTION_DATA_SOURCE_ID: ${{ vars.CLAIMGRAPH_NOTION_DATA_SOURCE_ID || secrets.CLAIMGRAPH_NOTION_DATA_SOURCE_ID }}
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           GITHUB_EVENT_PATH: ${{ github.event_path }}
           GITHUB_REF: ${{ github.ref }}

@@ -158,6 +158,6 @@ GitHub Actions synchronizes ClaimGraph Work Items in Notion from the branch and 
 Configure these repository values once:
 
 - Secret: `NOTION_TOKEN`
-- Repository variable: `CLAIMGRAPH_NOTION_DATA_SOURCE_ID`
+- Repository variable 또는 Secret: `CLAIMGRAPH_NOTION_DATA_SOURCE_ID`
 
 The workflow expects branches in the form `feature/CG-<number>`. A branch push moves the matching work item to `In Progress`, a pull request targeting `develop` moves it to `Review`, and a merged pull request moves it to `Done`.
