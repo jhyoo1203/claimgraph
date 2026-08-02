@@ -13,16 +13,3 @@ infra            로컬 인프라와 migration
 tests             평가·통합·E2E 테스트
 scripts           반복 작업 스크립트
 ```
-
-기능 구현과 의존성 설치는 다음 작업에서 진행한다.
-
-## Notion Work Item Sync
-
-GitHub Actions synchronizes ClaimGraph Work Items in Notion from the branch and pull request lifecycle.
-
-Configure these repository values once:
-
-- Secret: `NOTION_TOKEN`
-- Repository variable: `CLAIMGRAPH_NOTION_DATA_SOURCE_ID`
-
-The workflow expects branches in the form `feature/CG-<number>`. A branch push moves the matching work item to `In Progress`, a pull request targeting `develop` moves it to `Review`, and a merged pull request moves it to `Done`.

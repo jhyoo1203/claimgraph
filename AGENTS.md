@@ -141,3 +141,14 @@ Codex가 커밋할 때는 Conventional Commits를 사용한다.
 2. 가장 작은 변경을 구현한다.
 3. 변경된 경로를 테스트하고 lint/typecheck를 실행한다.
 4. 결과와 남은 위험을 커밋 또는 리뷰 설명에 남긴다.
+
+## Notion Work Item Sync
+
+GitHub Actions synchronizes ClaimGraph Work Items in Notion from the branch and pull request lifecycle.
+
+Configure these repository values once:
+
+- Secret: `NOTION_TOKEN`
+- Repository variable: `CLAIMGRAPH_NOTION_DATA_SOURCE_ID`
+
+The workflow expects branches in the form `feature/CG-<number>`. A branch push moves the matching work item to `In Progress`, a pull request targeting `develop` moves it to `Review`, and a merged pull request moves it to `Done`.
