@@ -1,0 +1,890 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://claimgraph.local/schemas/claimgraph-contract.schema.json",
+  "title": "ClaimGraph Contract",
+  "description": "Canonical ClaimGraph artifact envelope and domain contracts.",
+  "$ref": "#/$defs/ArtifactEnvelope",
+  "$defs": {
+    "ArtifactEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "artifact_type",
+        "schema_version",
+        "created_at",
+        "producer",
+        "input_hash",
+        "body"
+      ],
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/ArtifactId"
+        },
+        "artifact_type": {
+          "$ref": "#/$defs/ArtifactType"
+        },
+        "schema_version": {
+          "type": "string",
+          "const": "2026-08-02"
+        },
+        "created_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "producer": {
+          "$ref": "#/$defs/Producer"
+        },
+        "input_hash": {
+          "$ref": "#/$defs/Hash"
+        },
+        "body": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ResearchRun"
+            },
+            {
+              "$ref": "#/$defs/Task"
+            },
+            {
+              "$ref": "#/$defs/Source"
+            },
+            {
+              "$ref": "#/$defs/Evidence"
+            },
+            {
+              "$ref": "#/$defs/Claim"
+            },
+            {
+              "$ref": "#/$defs/ClaimEvidenceRelation"
+            },
+            {
+              "$ref": "#/$defs/Report"
+            },
+            {
+              "$ref": "#/$defs/ReportStatement"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "artifact_type": {
+                "const": "research_run"
+              }
+            },
+            "required": [
+              "artifact_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "body": {
+                "$ref": "#/$defs/ResearchRun"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "artifact_type": {
+                "const": "task"
+              }
+            },
+            "required": [
+              "artifact_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "body": {
+                "$ref": "#/$defs/Task"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "artifact_type": {
+                "const": "source"
+              }
+            },
+            "required": [
+              "artifact_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "body": {
+                "$ref": "#/$defs/Source"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "artifact_type": {
+                "const": "evidence"
+              }
+            },
+            "required": [
+              "artifact_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "body": {
+                "$ref": "#/$defs/Evidence"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "artifact_type": {
+                "const": "claim"
+              }
+            },
+            "required": [
+              "artifact_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "body": {
+                "$ref": "#/$defs/Claim"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "artifact_type": {
+                "const": "claim_evidence_relation"
+              }
+            },
+            "required": [
+              "artifact_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "body": {
+                "$ref": "#/$defs/ClaimEvidenceRelation"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "artifact_type": {
+                "const": "report"
+              }
+            },
+            "required": [
+              "artifact_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "body": {
+                "$ref": "#/$defs/Report"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "artifact_type": {
+                "const": "report_statement"
+              }
+            },
+            "required": [
+              "artifact_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "body": {
+                "$ref": "#/$defs/ReportStatement"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ResearchRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "research_run_id",
+        "question",
+        "status",
+        "started_at",
+        "tasks",
+        "sources",
+        "evidence",
+        "claims",
+        "claim_evidence_relations"
+      ],
+      "properties": {
+        "research_run_id": {
+          "$ref": "#/$defs/ResearchRunId"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "$ref": "#/$defs/ResearchRunStatus"
+        },
+        "started_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "completed_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Task"
+          },
+          "uniqueItems": true
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Source"
+          },
+          "uniqueItems": true
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Evidence"
+          },
+          "uniqueItems": true
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Claim"
+          },
+          "uniqueItems": true
+        },
+        "claim_evidence_relations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ClaimEvidenceRelation"
+          },
+          "uniqueItems": true
+        },
+        "reports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Report"
+          },
+          "uniqueItems": true
+        },
+        "error": {
+          "$ref": "#/$defs/Error"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "completed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "completed_at"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "failed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "completed_at",
+              "error"
+            ]
+          }
+        }
+      ]
+    },
+    "Task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_id",
+        "research_run_id",
+        "kind",
+        "status",
+        "input_hash",
+        "prompt_version",
+        "schema_version",
+        "attempt",
+        "created_at"
+      ],
+      "properties": {
+        "task_id": {
+          "$ref": "#/$defs/TaskId"
+        },
+        "research_run_id": {
+          "$ref": "#/$defs/ResearchRunId"
+        },
+        "parent_task_id": {
+          "$ref": "#/$defs/TaskId"
+        },
+        "kind": {
+          "$ref": "#/$defs/TaskKind"
+        },
+        "status": {
+          "$ref": "#/$defs/TaskStatus"
+        },
+        "input_hash": {
+          "$ref": "#/$defs/Hash"
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prompt_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schema_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "started_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "finished_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "error": {
+          "$ref": "#/$defs/Error"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "succeeded",
+                  "failed",
+                  "cancelled"
+                ]
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "finished_at"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "failed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "error"
+            ]
+          }
+        }
+      ]
+    },
+    "Source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "research_run_id",
+        "source_type",
+        "title",
+        "locator",
+        "retrieved_at",
+        "content_hash"
+      ],
+      "properties": {
+        "source_id": {
+          "$ref": "#/$defs/SourceId"
+        },
+        "research_run_id": {
+          "$ref": "#/$defs/ResearchRunId"
+        },
+        "source_type": {
+          "$ref": "#/$defs/SourceType"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "description": "URL, file path, DOI, or other stable source locator."
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "published_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "retrieved_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "content_hash": {
+          "$ref": "#/$defs/Hash"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        }
+      }
+    },
+    "Evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "source_id",
+        "research_run_id",
+        "kind",
+        "quote_or_summary",
+        "content_hash",
+        "collected_at"
+      ],
+      "properties": {
+        "evidence_id": {
+          "$ref": "#/$defs/EvidenceId"
+        },
+        "source_id": {
+          "$ref": "#/$defs/SourceId"
+        },
+        "research_run_id": {
+          "$ref": "#/$defs/ResearchRunId"
+        },
+        "kind": {
+          "$ref": "#/$defs/EvidenceKind"
+        },
+        "quote_or_summary": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Short excerpt, structured observation, or summary. Full source text must not be stored here."
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Page, section, timestamp, byte range, selector, or another within-source locator."
+        },
+        "content_hash": {
+          "$ref": "#/$defs/Hash"
+        },
+        "collected_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        }
+      }
+    },
+    "Claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "research_run_id",
+        "text",
+        "status",
+        "confidence",
+        "created_at"
+      ],
+      "properties": {
+        "claim_id": {
+          "$ref": "#/$defs/ClaimId"
+        },
+        "research_run_id": {
+          "$ref": "#/$defs/ResearchRunId"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus"
+        },
+        "confidence": {
+          "$ref": "#/$defs/Confidence"
+        },
+        "created_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        }
+      }
+    },
+    "ClaimEvidenceRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relation_id",
+        "claim_id",
+        "evidence_id",
+        "relation_type",
+        "confidence",
+        "created_at"
+      ],
+      "properties": {
+        "relation_id": {
+          "$ref": "#/$defs/RelationId"
+        },
+        "claim_id": {
+          "$ref": "#/$defs/ClaimId"
+        },
+        "evidence_id": {
+          "$ref": "#/$defs/EvidenceId"
+        },
+        "relation_type": {
+          "$ref": "#/$defs/ClaimEvidenceRelationType"
+        },
+        "confidence": {
+          "$ref": "#/$defs/Confidence"
+        },
+        "created_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        }
+      }
+    },
+    "Report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "report_id",
+        "research_run_id",
+        "title",
+        "status",
+        "created_at",
+        "statements"
+      ],
+      "properties": {
+        "report_id": {
+          "$ref": "#/$defs/ReportId"
+        },
+        "research_run_id": {
+          "$ref": "#/$defs/ResearchRunId"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "$ref": "#/$defs/ReportStatus"
+        },
+        "created_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "published_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "statements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReportStatement"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        }
+      }
+    },
+    "ReportStatement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement_id",
+        "report_id",
+        "claim_id",
+        "position",
+        "text",
+        "created_at"
+      ],
+      "properties": {
+        "statement_id": {
+          "$ref": "#/$defs/StatementId"
+        },
+        "report_id": {
+          "$ref": "#/$defs/ReportId"
+        },
+        "claim_id": {
+          "$ref": "#/$defs/ClaimId"
+        },
+        "position": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        }
+      }
+    },
+    "Producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "agent_run_id": {
+          "$ref": "#/$defs/AgentRunId"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "error_code",
+        "message"
+      ],
+      "properties": {
+        "error_code": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retryable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "ArtifactType": {
+      "type": "string",
+      "enum": [
+        "research_run",
+        "task",
+        "source",
+        "evidence",
+        "claim",
+        "claim_evidence_relation",
+        "report",
+        "report_statement"
+      ]
+    },
+    "ResearchRunStatus": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "running",
+        "completed",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "TaskKind": {
+      "type": "string",
+      "enum": [
+        "retrieve_source",
+        "extract_evidence",
+        "generate_claims",
+        "verify_claims",
+        "write_report"
+      ]
+    },
+    "TaskStatus": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "running",
+        "retrying",
+        "succeeded",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "SourceType": {
+      "type": "string",
+      "enum": [
+        "web",
+        "document",
+        "paper",
+        "dataset",
+        "api",
+        "manual"
+      ]
+    },
+    "EvidenceKind": {
+      "type": "string",
+      "enum": [
+        "quote",
+        "summary",
+        "table",
+        "metric",
+        "observation"
+      ]
+    },
+    "ClaimStatus": {
+      "type": "string",
+      "enum": [
+        "unsupported",
+        "supported",
+        "refuted",
+        "mixed",
+        "needs_review"
+      ]
+    },
+    "ClaimEvidenceRelationType": {
+      "type": "string",
+      "enum": [
+        "supports",
+        "refutes",
+        "qualifies",
+        "mentions"
+      ]
+    },
+    "ReportStatus": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "ready",
+        "published",
+        "failed"
+      ]
+    },
+    "Confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "Timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "ArtifactId": {
+      "type": "string",
+      "pattern": "^art_[A-Za-z0-9_-]+$"
+    },
+    "ResearchRunId": {
+      "type": "string",
+      "pattern": "^rr_[A-Za-z0-9_-]+$"
+    },
+    "TaskId": {
+      "type": "string",
+      "pattern": "^task_[A-Za-z0-9_-]+$"
+    },
+    "SourceId": {
+      "type": "string",
+      "pattern": "^src_[A-Za-z0-9_-]+$"
+    },
+    "EvidenceId": {
+      "type": "string",
+      "pattern": "^ev_[A-Za-z0-9_-]+$"
+    },
+    "ClaimId": {
+      "type": "string",
+      "pattern": "^clm_[A-Za-z0-9_-]+$"
+    },
+    "RelationId": {
+      "type": "string",
+      "pattern": "^rel_[A-Za-z0-9_-]+$"
+    },
+    "ReportId": {
+      "type": "string",
+      "pattern": "^rpt_[A-Za-z0-9_-]+$"
+    },
+    "StatementId": {
+      "type": "string",
+      "pattern": "^stmt_[A-Za-z0-9_-]+$"
+    },
+    "AgentRunId": {
+      "type": "string",
+      "pattern": "^agent_[A-Za-z0-9_-]+$"
+    }
+  }
+}
