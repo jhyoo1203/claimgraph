@@ -8,6 +8,8 @@
     "version": "0.1.0"
   },
   "input_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "model": "gpt-5.5",
+  "prompt_version": "extract-evidence@1",
   "body": {
     "claim_id": "clm_invalid_status",
     "research_run_id": "rr_demo_001",

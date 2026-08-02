@@ -15,6 +15,8 @@
         "created_at",
         "producer",
         "input_hash",
+        "model",
+        "prompt_version",
         "body"
       ],
       "properties": {
@@ -36,6 +38,16 @@
         },
         "input_hash": {
           "$ref": "#/$defs/Hash"
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Model or deterministic provider identifier used to produce the artifact."
+        },
+        "prompt_version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Version of the prompt or deterministic extraction rule used to produce the artifact."
         },
         "body": {
           "oneOf": [
