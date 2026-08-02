@@ -7,6 +7,7 @@ from app.api.sources import (
     router as sources_router,
 )
 
+from app.api.reports import router as reports_router
 from app.api.research_runs import router as research_runs_router
 
 app = FastAPI(title="ClaimGraph API", version="0.1.0")
@@ -24,6 +25,7 @@ async def source_not_found_handler(_: Request, _exc: SourceNotFoundError) -> JSO
     return JSONResponse(status_code=404, content=body.model_dump())
 
 app.include_router(research_runs_router)
+app.include_router(reports_router)
 
 
 @app.get("/health")
