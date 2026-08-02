@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 
+from app.api.reports import router as reports_router
 from app.api.research_runs import router as research_runs_router
 
 app = FastAPI(title="ClaimGraph API", version="0.1.0")
 
 app.include_router(research_runs_router)
+app.include_router(reports_router)
 
 
 @app.get("/health")
