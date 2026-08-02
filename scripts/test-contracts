@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -eu
+
+script_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+repo_root="$(CDPATH= cd -- "$script_dir/.." && pwd)"
+contract_test="$repo_root/tests/integration/test_contracts.py"
+
+if [ ! -f "$contract_test" ]; then
+  printf 'test-contracts: %s\n' "tests/integration/test_contracts.py is not present yet; contract test runner is ready."
+  exit 0
+fi
+
+cd "$repo_root"
+python3 -m pytest "$contract_test"

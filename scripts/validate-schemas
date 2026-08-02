@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+set -eu
+
+script_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+repo_root="$(CDPATH= cd -- "$script_dir/.." && pwd)"
+
+schema_dir="$repo_root/packages/schemas"
+fixture_dir="$repo_root/tests/eval"
+
+fail() {
+  printf 'validate-schemas: %s\n' "$1" >&2
+  exit 1
+}
+
+command -v python3 >/dev/null 2>&1 || fail "python3 is required to parse JSON files"
+
+[ -d "$schema_dir" ] || fail "missing schema directory: packages/schemas"
+[ -d "$fixture_dir" ] || fail "missing fixture directory: tests/eval"
+
+python3 - "$schema_dir" "$fixture_dir" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+schema_dir = Path(sys.argv[1])
+fixture_dir = Path(sys.argv[2])
+
+
+def json_files(directory: Path) -> list[Path]:
+    return sorted(path for path in directory.rglob("*.json") if path.is_file())
+
+
+schema_files = json_files(schema_dir)
+fixture_files = json_files(fixture_dir)
+
+missing_required_files = False
+if not schema_files:
+    print(
+        "validate-schemas: no JSON schema files found in packages/schemas. "
+        "Current develop may not have schemas yet; add schema JSON files before contract validation.",
+        file=sys.stderr,
+    )
+    missing_required_files = True
+
+if not fixture_files:
+    print(
+        "validate-schemas: no JSON fixture files found in tests/eval. "
+        "Current develop may not have fixtures yet; add eval fixture JSON files before contract validation.",
+        file=sys.stderr,
+    )
+    missing_required_files = True
+
+if missing_required_files:
+    sys.exit(1)
+
+failed = False
+for path in schema_files + fixture_files:
+    try:
+        with path.open("r", encoding="utf-8") as handle:
+            json.load(handle)
+    except json.JSONDecodeError as exc:
+        rel_path = path.relative_to(schema_dir.parent.parent)
+        print(
+            f"validate-schemas: invalid JSON in {rel_path}: "
+            f"line {exc.lineno}, column {exc.colno}: {exc.msg}",
+            file=sys.stderr,
+        )
+        failed = True
+    except OSError as exc:
+        rel_path = path.relative_to(schema_dir.parent.parent)
+        print(f"validate-schemas: cannot read {rel_path}: {exc}", file=sys.stderr)
+        failed = True
+
+if failed:
+    sys.exit(1)
+
+print(
+    f"validate-schemas: parsed {len(schema_files)} schema JSON file(s) "
+    f"and {len(fixture_files)} fixture JSON file(s)."
+)
+PY
