@@ -9,6 +9,8 @@
     "agent_run_id": "agent_demo_001"
   },
   "input_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "model": "gpt-5.5",
+  "prompt_version": "extract-evidence@1",
   "body": {
     "research_run_id": "rr_demo_001",
     "question": "Does the MVP require unsupported claims to remain visible?",
