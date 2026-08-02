@@ -1,0 +1,47 @@
+{
+  "question_id": "ai-tech-001",
+  "expectation_version": "2026-08-02",
+  "expected_claims": [
+    {
+      "id": "claim-001",
+      "text": "The Transformer architecture was introduced in the paper 'Attention Is All You Need'.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "paper",
+          "required_locator": "title or bibliographic metadata",
+          "must_support": "paper title and authorship/publication context"
+        }
+      ]
+    },
+    {
+      "id": "claim-002",
+      "text": "The architecture relies on attention mechanisms instead of recurrent or convolutional sequence modeling layers.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "paper",
+          "required_locator": "abstract, introduction, or model architecture section",
+          "must_support": "attention-based architecture without recurrence or convolution"
+        }
+      ]
+    },
+    {
+      "id": "claim-003",
+      "text": "Self-attention allows token relationships within a sequence to be modeled in parallel more directly than recurrent encoder-decoder processing.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "paper",
+          "required_locator": "architecture or computational complexity discussion",
+          "must_support": "self-attention, parallelization, or path-length comparison"
+        }
+      ]
+    }
+  ],
+  "unsupported_if": [
+    "The answer claims the Transformer was introduced by a paper other than 'Attention Is All You Need' without evidence.",
+    "The answer says recurrence is required by the original Transformer architecture.",
+    "The answer omits paper evidence for architectural claims."
+  ]
+}

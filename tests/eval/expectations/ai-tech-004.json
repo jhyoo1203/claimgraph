@@ -1,0 +1,52 @@
+{
+  "question_id": "ai-tech-004",
+  "expectation_version": "2026-08-02",
+  "expected_claims": [
+    {
+      "id": "claim-001",
+      "text": "Approximate nearest neighbor vector indexes retrieve semantically similar embeddings and trade exactness for faster search over high-dimensional vectors.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "documentation",
+          "required_locator": "vector index or ANN documentation",
+          "must_support": "approximate search over vectors and performance/recall tradeoff"
+        }
+      ]
+    },
+    {
+      "id": "claim-002",
+      "text": "BM25 keyword search ranks documents using lexical term matching and term statistics rather than embedding distance.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "paper",
+          "required_locator": "BM25 or probabilistic retrieval reference",
+          "must_support": "term-frequency or lexical scoring basis"
+        },
+        {
+          "source_type": "documentation",
+          "required_locator": "search engine BM25 ranking documentation",
+          "must_support": "BM25 lexical ranking behavior"
+        }
+      ]
+    },
+    {
+      "id": "claim-003",
+      "text": "For retrieval-augmented generation, vector and BM25 search have complementary failure modes, so hybrid retrieval or reranking may be appropriate when queries mix semantic and exact-token needs.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "benchmark",
+          "required_locator": "retrieval comparison or hybrid search evaluation",
+          "must_support": "complementary lexical and semantic retrieval behavior"
+        }
+      ]
+    }
+  ],
+  "unsupported_if": [
+    "The answer claims vector search is strictly better for all RAG queries.",
+    "The answer claims BM25 understands semantic similarity without lexical evidence.",
+    "The answer omits tradeoffs such as recall, latency, exact identifiers, or reranking."
+  ]
+}

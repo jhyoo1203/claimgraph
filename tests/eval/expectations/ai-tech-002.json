@@ -1,0 +1,52 @@
+{
+  "question_id": "ai-tech-002",
+  "expectation_version": "2026-08-02",
+  "expected_claims": [
+    {
+      "id": "claim-001",
+      "text": "LoRA is preferable when memory or trainable-parameter budget is constrained because it trains low-rank adapter weights rather than updating all base model weights.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "paper",
+          "required_locator": "LoRA method or parameter-efficiency section",
+          "must_support": "low-rank adaptation and reduced trainable parameters"
+        }
+      ]
+    },
+    {
+      "id": "claim-002",
+      "text": "Full fine-tuning can offer maximum task-specific flexibility but requires substantially more optimizer state, memory, and checkpoint storage.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "paper",
+          "required_locator": "comparison, experiment, or efficiency discussion",
+          "must_support": "resource cost or trainable weight comparison"
+        }
+      ]
+    },
+    {
+      "id": "claim-003",
+      "text": "The recommendation should include task-fit caveats, such as possible quality differences, adapter management overhead, and the need to validate on the target evaluation set.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "benchmark",
+          "required_locator": "task-specific evaluation or comparison table",
+          "must_support": "quality varies by task or model"
+        },
+        {
+          "source_type": "documentation",
+          "required_locator": "adapter usage or deployment guidance",
+          "must_support": "adapter handling or deployment considerations"
+        }
+      ]
+    }
+  ],
+  "unsupported_if": [
+    "The answer recommends LoRA solely because it is newer.",
+    "The answer claims LoRA always matches or beats full fine-tuning without benchmark evidence.",
+    "The answer does not cite evidence for memory or trainable-parameter claims."
+  ]
+}
