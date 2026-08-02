@@ -1,0 +1,19 @@
+{
+  "artifact_id": "art_invalid_claim_status",
+  "artifact_type": "claim",
+  "schema_version": "2026-08-02",
+  "created_at": "2026-08-02T14:30:00Z",
+  "producer": {
+    "name": "claimgraph-worker",
+    "version": "0.1.0"
+  },
+  "input_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "body": {
+    "claim_id": "clm_invalid_status",
+    "research_run_id": "rr_demo_001",
+    "text": "This fixture must fail because the status is not part of the contract.",
+    "status": "proven",
+    "confidence": 0.8,
+    "created_at": "2026-08-02T14:06:00Z"
+  }
+}

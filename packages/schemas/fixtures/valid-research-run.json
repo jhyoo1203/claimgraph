@@ -1,0 +1,97 @@
+{
+  "artifact_id": "art_valid_research_run",
+  "artifact_type": "research_run",
+  "schema_version": "2026-08-02",
+  "created_at": "2026-08-02T14:30:00Z",
+  "producer": {
+    "name": "claimgraph-worker",
+    "version": "0.1.0",
+    "agent_run_id": "agent_demo_001"
+  },
+  "input_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "body": {
+    "research_run_id": "rr_demo_001",
+    "question": "Does the MVP require unsupported claims to remain visible?",
+    "status": "completed",
+    "started_at": "2026-08-02T14:00:00Z",
+    "completed_at": "2026-08-02T14:29:00Z",
+    "tasks": [
+      {
+        "task_id": "task_demo_001",
+        "research_run_id": "rr_demo_001",
+        "kind": "extract_evidence",
+        "status": "succeeded",
+        "input_hash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "model": "gpt-5.5",
+        "prompt_version": "extract-evidence@1",
+        "schema_version": "2026-08-02",
+        "attempt": 1,
+        "created_at": "2026-08-02T14:01:00Z",
+        "started_at": "2026-08-02T14:02:00Z",
+        "finished_at": "2026-08-02T14:05:00Z"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "src_project_agents",
+        "research_run_id": "rr_demo_001",
+        "source_type": "document",
+        "title": "ClaimGraph project instructions",
+        "locator": "AGENTS.md",
+        "retrieved_at": "2026-08-02T14:02:00Z",
+        "content_hash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "ev_unsupported_visible",
+        "source_id": "src_project_agents",
+        "research_run_id": "rr_demo_001",
+        "kind": "summary",
+        "quote_or_summary": "Project rules say unsupported claims are shown as unsupported instead of hidden.",
+        "locator": "AGENTS.md#basic-principles",
+        "content_hash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "collected_at": "2026-08-02T14:04:00Z"
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "clm_unsupported_visible",
+        "research_run_id": "rr_demo_001",
+        "text": "Unsupported claims remain visible with unsupported status.",
+        "status": "supported",
+        "confidence": 0.9,
+        "created_at": "2026-08-02T14:06:00Z"
+      }
+    ],
+    "claim_evidence_relations": [
+      {
+        "relation_id": "rel_claim_evidence_001",
+        "claim_id": "clm_unsupported_visible",
+        "evidence_id": "ev_unsupported_visible",
+        "relation_type": "supports",
+        "confidence": 0.9,
+        "created_at": "2026-08-02T14:07:00Z"
+      }
+    ],
+    "reports": [
+      {
+        "report_id": "rpt_demo_001",
+        "research_run_id": "rr_demo_001",
+        "title": "Unsupported Claim Visibility",
+        "status": "ready",
+        "created_at": "2026-08-02T14:20:00Z",
+        "statements": [
+          {
+            "statement_id": "stmt_demo_001",
+            "report_id": "rpt_demo_001",
+            "claim_id": "clm_unsupported_visible",
+            "position": 0,
+            "text": "Unsupported claims remain visible with unsupported status.",
+            "created_at": "2026-08-02T14:21:00Z"
+          }
+        ]
+      }
+    ]
+  }
+}
