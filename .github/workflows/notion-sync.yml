@@ -1,0 +1,44 @@
+name: Sync ClaimGraph Work Items
+
+on:
+  push:
+    branches:
+      - "feature/CG-*"
+  pull_request:
+    branches:
+      - develop
+    types:
+      - opened
+      - reopened
+      - ready_for_review
+      - closed
+
+permissions:
+  contents: read
+
+concurrency:
+  group: claimgraph-notion-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Sync Notion work item
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATA_SOURCE_ID: ${{ vars.CLAIMGRAPH_NOTION_DATA_SOURCE_ID || secrets.CLAIMGRAPH_NOTION_DATA_SOURCE_ID }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
+          GITHUB_REF: ${{ github.ref }}
+        run: node .github/scripts/notion-work-item-sync.mjs

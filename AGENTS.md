@@ -86,6 +86,17 @@
 
 ## Git과 커밋
 
+### 브랜치와 PR
+
+- 기본 개발 브랜치는 `develop`, 릴리스 브랜치는 `main`으로 사용한다.
+- 모든 작업 브랜치는 Notion Work Item ID를 포함한 `feature/CG-<번호>` 형식을 사용한다.
+- MVP에서는 Feature, Bug, Chore, Spike를 구분하지 않고 동일한 브랜치 형식을 사용한다.
+- 예: `feature/CG-1`, `feature/CG-12`
+- 작업 브랜치는 `develop`에서 만들고, PR 대상도 `develop`으로 지정한다.
+- GitHub Actions가 브랜치 push 시 `In Progress`, PR 생성 시 `Review`, `develop` 머지 시 `Done`으로 Notion 카드를 갱신한다.
+- Notion 카드가 없는 ID나 형식에 맞지 않는 브랜치는 자동 동기화 대상에서 제외한다.
+- 모든 PR은 하나 이상의 assignee와 label을 반드시 등록한다.
+
 ### Conventional Commits
 
 Codex가 커밋할 때는 Conventional Commits를 사용한다.
@@ -97,9 +108,17 @@ Codex가 커밋할 때는 Conventional Commits를 사용한다.
 허용 type은 `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, `build`, `ci`, `perf`, `style`, `revert`다.
 
 - 한 커밋은 하나의 목적만 포함한다.
+- Conventional Commit의 type과 scope는 표준 토큰을 유지하되, 제목의 설명은 한국어로 작성한다.
+- 커밋 본문을 작성할 때도 한국어를 사용한다.
 - 제목은 짧고 명확하게 작성한다.
 - 본문은 동작 변경의 이유나 호환성 영향을 설명할 때만 추가한다.
 - 테스트가 통과하지 않으면 커밋하지 않는다. 불가피한 경우 커밋 본문에 검증 gap을 기록한다.
+
+### PR 작성 규칙
+
+- PR 제목과 본문은 한국어로 작성한다. Conventional Commit prefix를 사용할 때도 설명은 한국어로 작성한다.
+- PR 본문에는 변경 요약, 검증 결과, 설정·리스크를 포함한다.
+- PR 생성 시 assignee와 label을 빠뜨리지 않는다.
 
 ### 금지 사항
 
@@ -131,3 +150,14 @@ Codex가 커밋할 때는 Conventional Commits를 사용한다.
 2. 가장 작은 변경을 구현한다.
 3. 변경된 경로를 테스트하고 lint/typecheck를 실행한다.
 4. 결과와 남은 위험을 커밋 또는 리뷰 설명에 남긴다.
+
+## Notion Work Item Sync
+
+GitHub Actions synchronizes ClaimGraph Work Items in Notion from the branch and pull request lifecycle.
+
+Configure these repository values once:
+
+- Secret: `NOTION_TOKEN`
+- Repository variable 또는 Secret: `CLAIMGRAPH_NOTION_DATA_SOURCE_ID`
+
+The workflow expects branches in the form `feature/CG-<number>`. A branch push moves the matching work item to `In Progress`, a pull request targeting `develop` moves it to `Review`, and a merged pull request moves it to `Done`.
