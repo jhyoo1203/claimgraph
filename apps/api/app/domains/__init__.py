@@ -1,1 +1,19 @@
 """Domain models and services for the ClaimGraph API."""
+
+from app.domains.sources import (
+    ExtractionStatus,
+    Source,
+    SourceExtractionStatus,
+    SourceRecord,
+    SourceResponse,
+    SourceType,
+)
+
+__all__ = [
+    "ExtractionStatus",
+    "Source",
+    "SourceExtractionStatus",
+    "SourceRecord",
+    "SourceResponse",
+    "SourceType",
+]
