@@ -1,0 +1,41 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Node / frontend
+node_modules/
+.next/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Local tools and workspace state
+.mcp.json
+.omx/
+.codex/
+.idea/
+.vscode/
+.DS_Store
+
+# Local infrastructure and generated data
+tmp/
+temp/
+*.local.*
+*.log
+docker-data/
+postgres-data/
+redis-data/
+object-storage/
