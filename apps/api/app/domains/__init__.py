@@ -1,4 +1,4 @@
-"""Domain models used by the ClaimGraph API."""
+"""Domain models and services for the ClaimGraph API."""
 
 from app.domains.sources import (
     ExtractionStatus,

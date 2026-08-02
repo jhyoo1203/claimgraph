@@ -1,1 +1,1 @@
-"""HTTP routers for the ClaimGraph API."""
+"""HTTP route modules for the ClaimGraph API."""
