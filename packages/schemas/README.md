@@ -4,7 +4,7 @@
 
 ## Contracts
 
-- `ArtifactEnvelope`: reproducible wrapper for every persisted artifact. It records `artifact_id`, `artifact_type`, `schema_version`, `created_at`, `producer`, `input_hash`, and the typed `body`.
+- `ArtifactEnvelope`: reproducible wrapper for every persisted artifact. It records `artifact_id`, `artifact_type`, `schema_version`, `created_at`, `producer`, `input_hash`, `model`, `prompt_version`, and the typed `body`.
 - `ResearchRun`: top-level research execution snapshot containing `Task`, `Source`, `Evidence`, `Claim`, `ClaimEvidenceRelation`, and optional `Report` objects.
 - `Task`: reproducible unit of work. It records input hash, model, prompt version, schema version, attempt count, status, timestamps, and stable error details when failed.
 - `Source`: source metadata and content hash. Full source text is intentionally outside this contract.
@@ -26,6 +26,7 @@
 The schema enforces these invariants:
 
 - Every artifact is wrapped in an `ArtifactEnvelope`.
+- Every artifact records the model (or deterministic provider) and prompt/rule version used to produce it.
 - `artifact_type` must match the concrete `body` definition.
 - IDs use stable prefixes such as `rr_`, `task_`, `src_`, `ev_`, `clm_`, `rel_`, `rpt_`, and `stmt_`.
 - Hashes use `sha256:<64 lowercase hex characters>`.
@@ -47,6 +48,7 @@ Runtime code must additionally enforce graph invariants that JSON Schema cannot 
 ## Fixtures
 
 - `fixtures/valid-research-run.json`: valid research run envelope with one task, source, evidence item, claim, relation, and report.
+- `fixtures/valid-extractor-output.json`: deterministic extractor envelope with a supported Claim, its Evidence and `supports` relation, plus an explicitly preserved unsupported Claim.
 - `fixtures/invalid-claim-status.json`: invalid claim envelope because `body.status` is `proven`, which is not in `ClaimStatus`.
 
 ## Validation

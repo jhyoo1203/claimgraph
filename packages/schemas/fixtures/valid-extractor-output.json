@@ -1,0 +1,87 @@
+{
+  "artifact_id": "art_1b01231d9761c97cf63c6d9a",
+  "artifact_type": "research_run",
+  "schema_version": "2026-08-02",
+  "created_at": "2026-08-02T14:04:00Z",
+  "producer": {
+    "name": "claimgraph-fixture-extractor",
+    "version": "0.1.0"
+  },
+  "input_hash": "sha256:d0ab3bd667915ba149640cc5c572d9e70e1c57645ce40f55620f2084f302d8f0",
+  "model": "fixture-extractor",
+  "prompt_version": "fixture-extractor@1",
+  "body": {
+    "research_run_id": "rr_fixture_001",
+    "question": "Which fixture claim is supported?",
+    "status": "completed",
+    "started_at": "2026-08-02T14:04:00Z",
+    "completed_at": "2026-08-02T14:04:00Z",
+    "tasks": [
+      {
+        "task_id": "task_43dd1ed0be34ba11a4e4752b",
+        "research_run_id": "rr_fixture_001",
+        "kind": "extract_evidence",
+        "status": "succeeded",
+        "input_hash": "sha256:d0ab3bd667915ba149640cc5c572d9e70e1c57645ce40f55620f2084f302d8f0",
+        "model": "fixture-extractor",
+        "prompt_version": "fixture-extractor@1",
+        "schema_version": "2026-08-02",
+        "attempt": 1,
+        "created_at": "2026-08-02T14:04:00Z",
+        "started_at": "2026-08-02T14:04:00Z",
+        "finished_at": "2026-08-02T14:04:00Z"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "src_fixture_001",
+        "research_run_id": "rr_fixture_001",
+        "source_type": "document",
+        "title": "Fixture source",
+        "locator": "fixture://cg-11",
+        "retrieved_at": "2026-08-02T14:04:00Z",
+        "content_hash": "sha256:6edf8ef7ab3bfc5f7bd86b3fa07fad959e12a30fcb9f0ed2a2ab6713029fe0d1"
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "ev_ed848badf69f4f80743a4d27",
+        "source_id": "src_fixture_001",
+        "research_run_id": "rr_fixture_001",
+        "kind": "quote",
+        "quote_or_summary": "The fixture source supports the first claim.",
+        "locator": "section:1",
+        "content_hash": "sha256:6edf8ef7ab3bfc5f7bd86b3fa07fad959e12a30fcb9f0ed2a2ab6713029fe0d1",
+        "collected_at": "2026-08-02T14:04:00Z"
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "clm_bda701dd383eeb4bdf17e89a",
+        "research_run_id": "rr_fixture_001",
+        "text": "The fixture source supports the first claim.",
+        "status": "supported",
+        "confidence": 0.9,
+        "created_at": "2026-08-02T14:04:00Z"
+      },
+      {
+        "claim_id": "clm_1de80dc2e8955fe9f8c740e5",
+        "research_run_id": "rr_fixture_001",
+        "text": "This claim has no evidence.",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "created_at": "2026-08-02T14:04:00Z"
+      }
+    ],
+    "claim_evidence_relations": [
+      {
+        "relation_id": "rel_7c5b3db8bad6cff629afabab",
+        "claim_id": "clm_bda701dd383eeb4bdf17e89a",
+        "evidence_id": "ev_ed848badf69f4f80743a4d27",
+        "relation_type": "supports",
+        "confidence": 0.9,
+        "created_at": "2026-08-02T14:04:00Z"
+      }
+    ]
+  }
+}
