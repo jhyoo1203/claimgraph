@@ -54,3 +54,17 @@ idempotency key로 취급하고 `SnapshotWriteResult.created`로 신규 저장�
 넣지 않고 snapshot 저장 경계에서 별도로 보존한다. `apps/worker/__init__.py`
 와 공용 schema에 retrieval 타입을 재-export하거나 중복 정의하지 않는 것이
 의도된 경계다.
+
+## CG-14 Phase 1 integration adapter
+
+`tests/eval/phase1_evaluator.py`는 이 포트들을 실제 외부 인프라 없이 잇는
+재현 가능한 adapter다. `FakeSearchProvider`는 질문당 한 번 호출되고,
+`retrieve_sources`가 반환한 여러 Source snapshot에 기존
+`FixtureExtractor`를 각각 적용한 뒤 Claim key 기준으로 결과를 합친다.
+그 결과를 API의 in-memory `ReportRepository`에 저장하고 Report 조회 route의
+인용 Markdown과 Web mock envelope를 함께 검증한다. 원문 snapshot과
+Evidence 요약은 서로 다른 필드로 유지된다.
+
+이 adapter는 LLM, 실제 검색, PostgreSQL, Redis, 인증, queue를 추가하지 않는다.
+`tests/eval/phase1_fixture.json`의 fixture 데이터는 deterministic extraction과
+인용 경로 회귀용이며, Phase 2의 최신성·검색 품질·운영 저장소를 검증하지 않는다.

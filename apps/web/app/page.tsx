@@ -43,27 +43,27 @@ const CLAIM_STATUS_META: Record<
   supported: {
     icon: "↗",
     label: "근거 있음",
-    description: "연결된 Evidence가 이 Claim을 지지합니다.",
+    description: "연결된 근거가 이 주장을 뒷받침합니다.",
   },
   unsupported: {
     icon: "∅",
     label: "근거 부족",
-    description: "현재 연결된 Evidence가 없습니다.",
+    description: "현재 연결된 근거가 없습니다.",
   },
   refuted: {
     icon: "×",
     label: "반박됨",
-    description: "연결된 Evidence에 반박 관계가 있습니다.",
+    description: "연결된 근거가 이 주장을 반박합니다.",
   },
   mixed: {
     icon: "±",
     label: "서로 다른 근거",
-    description: "지지와 반박 관계가 함께 있습니다.",
+    description: "서로 다른 근거가 함께 있어 판단이 필요합니다.",
   },
   needs_review: {
     icon: "?",
     label: "검토 필요",
-    description: "Verifier 또는 Human Gate의 판단이 남아 있습니다.",
+    description: "추가 검토가 필요한 상태입니다.",
   },
 };
 
@@ -115,7 +115,7 @@ function getErrorMessage(value: unknown): string {
     return value.message;
   }
 
-  return "Report 응답을 확인하지 못했습니다.";
+  return "보고서 응답을 확인하지 못했습니다.";
 }
 
 async function requestReport(
@@ -344,12 +344,14 @@ function getEvidenceTrail(report: Report, claimId: string): EvidenceTrail[] {
 function StatusBadge({ status }: { status: Claim["status"] }) {
   const meta = CLAIM_STATUS_META[status];
   return (
-    <span className={`status-badge status-${status}`}>
+    <span
+      aria-label={`주장 상태: ${meta.label}`}
+      className={`status-badge status-${status}`}
+    >
       <span aria-hidden="true" className="status-icon">
         {meta.icon}
       </span>
       <span>{meta.label}</span>
-      <code>{status}</code>
     </span>
   );
 }
@@ -366,9 +368,9 @@ function AppShell({ children }: { children: ReactNode }) {
           <span>ClaimGraph</span>
         </Link>
         <div className="topbar-meta">
-          <span>REPORT VIEW</span>
+          <span>보고서</span>
           <span className="topbar-divider" />
-          <span>근거를 따라 읽는 작업 공간</span>
+          <span>문장과 원문을 차례로 확인합니다.</span>
         </div>
       </header>
       {children}
@@ -379,7 +381,7 @@ function AppShell({ children }: { children: ReactNode }) {
 function LoadingState() {
   return (
     <div aria-live="polite" className="state-card loading-card" role="status">
-      <div className="state-kicker">REPORT / LOADING</div>
+      <div className="state-kicker">보고서 불러오는 중</div>
       <div className="skeleton skeleton-title" />
       <div className="skeleton skeleton-line skeleton-line-wide" />
       <div className="skeleton skeleton-line" />
@@ -388,7 +390,7 @@ function LoadingState() {
         <div className="skeleton skeleton-block" />
         <div className="skeleton skeleton-block skeleton-block-short" />
       </div>
-      <p className="state-supporting">Report와 연결된 근거를 불러오는 중입니다.</p>
+      <p className="state-supporting">보고서와 연결된 근거를 불러오는 중입니다.</p>
     </div>
   );
 }
@@ -399,13 +401,11 @@ function EmptyState({ onRetry }: { onRetry: () => void }) {
       <div aria-hidden="true" className="state-symbol">
         —
       </div>
-      <div className="state-kicker">REPORT / EMPTY</div>
-      <h1>표시할 Report가 없습니다.</h1>
-      <p>
-        아직 읽을 수 있는 결과가 없거나, 현재 요청에 연결된 Report가 없습니다.
-      </p>
+      <div className="state-kicker">보고서 없음</div>
+      <h1>아직 보고서가 없습니다.</h1>
+      <p>조사가 끝나면 이곳에서 결과와 근거를 확인할 수 있습니다.</p>
       <button className="button button-primary" onClick={onRetry} type="button">
-        다시 읽기
+        다시 불러오기
       </button>
     </div>
   );
@@ -417,11 +417,11 @@ function ErrorState({ message, onRetry }: { message: string; onRetry: () => void
       <div aria-hidden="true" className="state-symbol">
         !
       </div>
-      <div className="state-kicker">REPORT / ERROR</div>
-      <h1>Report를 불러오지 못했습니다.</h1>
+      <div className="state-kicker">불러오기 오류</div>
+      <h1>보고서를 불러오지 못했습니다.</h1>
       <p>{message}</p>
       <button className="button button-primary" onClick={onRetry} type="button">
-        다시 시도
+        다시 불러오기
       </button>
     </div>
   );
@@ -433,25 +433,25 @@ function ReportOutline({ report }: { report: Report }) {
   ).length;
 
   return (
-    <aside aria-label="Report overview" className="trace-rail">
-      <div className="rail-kicker">TRACE RAIL</div>
+    <aside aria-label="보고서 개요" className="trace-rail">
+      <div className="rail-kicker">근거 안내</div>
       <p className="rail-title">문장에서 근거까지</p>
       <p className="rail-copy">
-        Report statement를 따라가며 Claim 상태와 Evidence 링크를 확인합니다.
+        문장에 담긴 주장과 그 근거를 차례로 확인합니다.
       </p>
 
       <div className="rail-stats">
         <div>
           <strong>{report.statements.length}</strong>
-          <span>statements</span>
+          <span>문장</span>
         </div>
         <div>
           <strong>{report.sources.length}</strong>
-          <span>sources</span>
+          <span>원문</span>
         </div>
       </div>
 
-      <nav aria-label="Report statements" className="trace-index">
+      <nav aria-label="보고서 문장" className="trace-index">
         {report.statements.map((statement, index) => {
           const claim = report.claims.find(
             (candidate) => candidate.claim_id === statement.claim_id,
@@ -466,7 +466,7 @@ function ReportOutline({ report }: { report: Report }) {
                 {String(index + 1).padStart(2, "0")}
               </span>
               <span>
-                <span className="trace-index-label">Statement {index + 1}</span>
+                <span className="trace-index-label">문장 {index + 1}</span>
                 <span className="trace-index-status">
                   {claim ? CLAIM_STATUS_META[claim.status].label : "연결 누락"}
                 </span>
@@ -480,8 +480,7 @@ function ReportOutline({ report }: { report: Report }) {
         <div className="rail-note">
           <span aria-hidden="true">∅</span>
           <p>
-            {unsupportedCount}개의 Claim은 Evidence가 없어 <code>unsupported</code>로
-            남아 있습니다.
+            {unsupportedCount}개 주장은 연결된 근거가 없어 ‘근거 부족’으로 남아 있습니다.
           </p>
         </div>
       )}
@@ -497,19 +496,22 @@ function EvidenceCard({ trail }: { trail: EvidenceTrail }) {
         <span className="relation-label">
           <span aria-hidden="true">↳</span> {RELATION_LABEL[relation.relation_type]}
         </span>
-        <code>{evidence.evidence_id}</code>
       </div>
       <p className="evidence-quote">{evidence.quote_or_summary}</p>
+      <details className="technical-details">
+        <summary>근거 정보</summary>
+        <code>근거 ID: {evidence.evidence_id}</code>
+      </details>
       <div className="evidence-source">
         <div>
-          <span className="source-label">Source</span>
+          <span className="source-label">원문</span>
           <strong>{source.title}</strong>
           <span className="source-meta">
-            {source.publisher} · {evidence.locator}
+            {source.publisher} · 위치: {evidence.locator}
           </span>
         </div>
         <a
-          aria-label={`${source.title} 원문에서 Evidence 확인`}
+          aria-label={`${source.title} 원문에서 근거 확인`}
           className="evidence-link"
           href={source.source_url ?? source.locator}
           rel="noreferrer"
@@ -544,25 +546,28 @@ function StatementCard({
         {String(index + 1).padStart(2, "0")}
       </div>
       <div className="statement-content">
-        <div className="statement-eyebrow">REPORT STATEMENT</div>
+        <div className="statement-eyebrow">보고서 문장</div>
         <p className="statement-text">{statement.text}</p>
         <div className={`claim-panel claim-panel-${status}`}>
           <div className="claim-panel-heading">
-            <span className="claim-label">Claim</span>
+            <span className="claim-label">주장</span>
             {claim ? <StatusBadge status={claim.status} /> : <StatusBadge status="unsupported" />}
           </div>
           {claim ? (
             <>
               <p className="claim-text">{claim.text}</p>
               <div className="claim-meta">
-                <code>{claim.claim_id}</code>
-                <span>confidence {formatConfidence(claim.confidence)}</span>
+                <span>근거 연결 정도 {formatConfidence(claim.confidence)}</span>
               </div>
+              <details className="technical-details">
+                <summary>기술 정보</summary>
+                <code>주장 ID: {claim.claim_id}</code>
+              </details>
               <p className="claim-description">
                 <span aria-hidden="true">{statusMeta.icon}</span> {statusMeta.description}
               </p>
               {trail.length > 0 ? (
-                <ul aria-label={`${claim.claim_id} Evidence`} className="evidence-list">
+                <ul aria-label="연결된 근거" className="evidence-list">
                   {trail.map((item) => (
                     <EvidenceCard key={item.relation.relation_id} trail={item} />
                   ))}
@@ -571,8 +576,8 @@ function StatementCard({
                 <div className="unsupported-callout">
                   <span aria-hidden="true">∅</span>
                   <div>
-                    <strong>연결된 Evidence 없음</strong>
-                    <p>이 Claim은 근거가 부족하므로 숨기지 않고 `unsupported`로 표시합니다.</p>
+                    <strong>연결된 근거가 없습니다.</strong>
+                    <p>확인할 근거가 없어 결과에서 제외하지 않고 ‘근거 부족’으로 표시했습니다.</p>
                   </div>
                 </div>
               )}
@@ -581,8 +586,8 @@ function StatementCard({
             <div className="unsupported-callout">
               <span aria-hidden="true">!</span>
               <div>
-                <strong>Claim 연결을 확인할 수 없음</strong>
-                <p>Report statement가 현재 snapshot의 Claim을 가리키지 않습니다.</p>
+                <strong>이 문장에 연결된 주장을 찾을 수 없습니다.</strong>
+                <p>현재 결과에서 연결 정보를 확인할 수 없습니다.</p>
               </div>
             </div>
           )}
@@ -604,9 +609,7 @@ function ReportView({ report }: { report: Report }) {
         <main className="report-column">
           <header className="report-header">
             <div className="report-kicker">
-              <span>REPORT</span>
-              <span aria-hidden="true">/</span>
-              <code>{report.report_id}</code>
+              <span>보고서</span>
             </div>
             <div className="report-header-row">
               <div>
@@ -619,22 +622,26 @@ function ReportView({ report }: { report: Report }) {
               </span>
             </div>
             <div className="report-metadata">
-              <span>생성 {formatDate(report.created_at)}</span>
+              <span>작성 {formatDate(report.created_at)}</span>
               <span aria-hidden="true" className="metadata-dot" />
               <span>{report.statements.length}개 문장</span>
               <span aria-hidden="true" className="metadata-dot" />
-              <span>{report.sources.length}개 Source</span>
+              <span>{report.sources.length}개 원문</span>
             </div>
+            <details className="technical-details report-technical-details">
+              <summary>기술 정보</summary>
+              <code>보고서 ID: {report.report_id}</code>
+            </details>
           </header>
 
           {unsupportedCount > 0 && (
             <div className="report-notice" role="status">
               <span aria-hidden="true">∅</span>
               <p>
-                <strong>근거가 부족한 Claim도 보고서에 남겨 두었습니다.</strong>
+                <strong>근거가 부족한 주장도 결과에 남겨 두었습니다.</strong>
                 <span>
-                  Evidence 경로가 없는 {unsupportedCount}개 항목은 판단을 보류할 수 있도록
-                  `unsupported` 상태로 구분합니다.
+                  연결된 근거가 없는 {unsupportedCount}개 항목은 판단을 보류할 수 있도록
+                  ‘근거 부족’으로 표시합니다.
                 </span>
               </p>
             </div>
@@ -643,10 +650,10 @@ function ReportView({ report }: { report: Report }) {
           <section aria-labelledby="report-body-heading" className="report-section">
             <div className="section-heading">
               <div>
-                <span className="section-kicker">01 / REPORT BODY</span>
+                <span className="section-kicker">01 / 보고서 내용</span>
                 <h2 id="report-body-heading">보고서 본문</h2>
               </div>
-              <span className="section-hint">Markdown</span>
+              <span className="section-hint">읽기 쉬운 형식</span>
             </div>
             <MarkdownBody markdown={report.markdown} />
           </section>
@@ -654,10 +661,10 @@ function ReportView({ report }: { report: Report }) {
           <section aria-labelledby="claim-trace-heading" className="report-section claim-trace-section">
             <div className="section-heading">
               <div>
-                <span className="section-kicker">02 / CLAIM TRACE</span>
-                <h2 id="claim-trace-heading">문장과 근거의 연결</h2>
+                <span className="section-kicker">02 / 근거 확인</span>
+                <h2 id="claim-trace-heading">문장에서 근거 확인</h2>
               </div>
-              <span className="section-hint">Claim → Evidence → Source</span>
+              <span className="section-hint">주장 → 근거 → 원문</span>
             </div>
             <ol className="statement-list">
               {report.statements.map((statement, index) => (
@@ -672,8 +679,11 @@ function ReportView({ report }: { report: Report }) {
           </section>
 
           <footer className="report-footer">
-            <span>현재 Report snapshot의 표시 결과입니다.</span>
-            <code>{report.research_run_id}</code>
+            <span>저장된 결과와 연결된 원문을 보여드리고 있습니다.</span>
+            <details className="technical-details">
+              <summary>기술 정보</summary>
+              <code>조사 ID: {report.research_run_id}</code>
+            </details>
           </footer>
         </main>
       </div>
