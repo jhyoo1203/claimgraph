@@ -86,6 +86,16 @@
 
 ## Git과 커밋
 
+### 브랜치와 PR
+
+- 기본 개발 브랜치는 `develop`, 릴리스 브랜치는 `main`으로 사용한다.
+- 모든 작업 브랜치는 Notion Work Item ID를 포함한 `feature/CG-<번호>` 형식을 사용한다.
+- MVP에서는 Feature, Bug, Chore, Spike를 구분하지 않고 동일한 브랜치 형식을 사용한다.
+- 예: `feature/CG-1`, `feature/CG-12`
+- 작업 브랜치는 `develop`에서 만들고, PR 대상도 `develop`으로 지정한다.
+- GitHub Actions가 브랜치 push 시 `In Progress`, PR 생성 시 `Review`, `develop` 머지 시 `Done`으로 Notion 카드를 갱신한다.
+- Notion 카드가 없는 ID나 형식에 맞지 않는 브랜치는 자동 동기화 대상에서 제외한다.
+
 ### Conventional Commits
 
 Codex가 커밋할 때는 Conventional Commits를 사용한다.
