@@ -24,7 +24,7 @@ export async function GET(
     return Response.json(
       {
         error_code: "REPORT_NOT_FOUND",
-        message: "요청한 Report를 찾을 수 없습니다.",
+        message: "요청한 보고서를 찾을 수 없습니다.",
       },
       { status: 404 },
     );
@@ -35,7 +35,7 @@ export async function GET(
     return Response.json(
       {
         error_code: "REPORT_UNAVAILABLE",
-        message: "Report 저장소에 일시적으로 연결할 수 없습니다.",
+        message: "보고서를 잠시 불러오지 못했습니다.",
       },
       { status: 503 },
     );

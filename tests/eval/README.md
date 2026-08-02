@@ -18,6 +18,36 @@ The question set covers:
 
 Exactly five questions are marked with `phase1_candidate: true`. At least two questions use `difficulty: "deterministic"` so phase 1 can include stable parsing and citation checks.
 
+## Phase 1 vertical slice
+
+`phase1_fixture.json` is a network-free search response and deterministic
+Claim/Evidence candidate fixture for the five Phase 1 questions. The evaluator
+reuses the existing MVP ports in this order:
+
+```text
+question input
+  -> ResearchRun (in-memory API contract)
+  -> one FakeSearchProvider call
+  -> Source snapshots (in-memory Worker store)
+  -> FixtureExtractor per Source
+  -> merged Claim/Evidence relations
+  -> Report repository + cited Markdown route
+  -> Web mock `{ "report": ... }` response
+```
+
+Run the evaluator from the repository root:
+
+```sh
+scripts/evaluate-phase1
+scripts/evaluate-phase1 --json
+```
+
+Each question must pass its expected Claim/source-type checks, expose at least
+one `Claim -> Evidence -> Source` path in the retrieved Markdown, and preserve
+an unsupported Claim in both the Report and the Markdown warning. The fixture
+uses only `fixture://` locators; it is not a substitute for Phase 2 live search
+or current-release verification.
+
 ## Evaluation Criteria
 
 An answer passes when:

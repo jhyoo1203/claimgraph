@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eu
+
+script_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+repo_root="$(CDPATH= cd -- "$script_dir/.." && pwd)"
+evaluator="$repo_root/tests/eval/phase1_evaluator.py"
+
+if command -v uv >/dev/null 2>&1; then
+  exec uv run --project "$repo_root/apps/api" python "$evaluator" "$@"
+fi
+
+exec python3 "$evaluator" "$@"

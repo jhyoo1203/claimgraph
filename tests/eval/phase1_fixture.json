@@ -1,0 +1,389 @@
+{
+  "fixture_version": "2026-08-03",
+  "retrieved_at": "2026-08-03T00:00:00Z",
+  "questions": {
+    "ai-tech-001": {
+      "sources": [
+        {
+          "source_type": "paper",
+          "eval_source_type": "paper",
+          "title": "Attention Is All You Need",
+          "locator": "fixture://phase1/ai-tech-001/transformer-paper",
+          "publisher": "Fixture paper corpus",
+          "content": "Attention Is All You Need introduced the Transformer architecture. The model relies on attention mechanisms instead of recurrent or convolutional sequence modeling layers. Self-attention models token relationships within a sequence in parallel and offers shorter paths than recurrent encoder-decoder processing."
+        }
+      ],
+      "claims": [
+        {
+          "key": "claim-001",
+          "text": "The Transformer architecture was introduced in the paper 'Attention Is All You Need'.",
+          "confidence": 0.98,
+          "evidence": [
+            {
+              "source_index": 0,
+              "kind": "quote",
+              "quote_or_summary": "Attention Is All You Need introduced the Transformer architecture.",
+              "locator": "paper:title-and-bibliographic-metadata"
+            }
+          ]
+        },
+        {
+          "key": "claim-002",
+          "text": "The architecture relies on attention mechanisms instead of recurrent or convolutional sequence modeling layers.",
+          "confidence": 0.96,
+          "evidence": [
+            {
+              "source_index": 0,
+              "kind": "quote",
+              "quote_or_summary": "The model relies on attention mechanisms instead of recurrent or convolutional sequence modeling layers.",
+              "locator": "paper:abstract-and-introduction"
+            }
+          ]
+        },
+        {
+          "key": "claim-003",
+          "text": "Self-attention allows token relationships within a sequence to be modeled in parallel more directly than recurrent encoder-decoder processing.",
+          "confidence": 0.94,
+          "evidence": [
+            {
+              "source_index": 0,
+              "kind": "quote",
+              "quote_or_summary": "Self-attention models token relationships within a sequence in parallel and offers shorter paths than recurrent encoder-decoder processing.",
+              "locator": "paper:architecture-and-computational-complexity"
+            }
+          ]
+        },
+        {
+          "key": "unsupported-001",
+          "source_index": 0,
+          "text": "The fixture contains an additional Transformer performance claim without supporting Evidence.",
+          "confidence": 0.2,
+          "evidence": []
+        }
+      ]
+    },
+    "ai-tech-002": {
+      "sources": [
+        {
+          "source_type": "paper",
+          "eval_source_type": "paper",
+          "title": "LoRA Method Paper",
+          "locator": "fixture://phase1/ai-tech-002/lora-paper",
+          "publisher": "Fixture paper corpus",
+          "content": "LoRA trains low-rank adapter weights while the base model weights remain frozen, reducing trainable parameters and memory use. Full fine-tuning updates all base model weights and requires more optimizer state, memory, and checkpoint storage."
+        },
+        {
+          "source_type": "document",
+          "eval_source_type": "benchmark",
+          "title": "LoRA Task Comparison",
+          "locator": "fixture://phase1/ai-tech-002/lora-benchmark",
+          "publisher": "Fixture benchmark corpus",
+          "content": "The task-specific comparison table shows that adaptation quality can differ by task and model; a parameter-efficient method should be validated on the target evaluation set."
+        },
+        {
+          "source_type": "document",
+          "eval_source_type": "documentation",
+          "title": "Adapter Deployment Guidance",
+          "locator": "fixture://phase1/ai-tech-002/adapter-docs",
+          "publisher": "Fixture documentation corpus",
+          "content": "Adapter deployment guidance covers adapter management overhead, serving configuration, and validation on the target evaluation set."
+        }
+      ],
+      "claims": [
+        {
+          "key": "claim-001",
+          "text": "LoRA is preferable when memory or trainable-parameter budget is constrained because it trains low-rank adapter weights rather than updating all base model weights.",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "source_index": 0,
+              "kind": "quote",
+              "quote_or_summary": "LoRA trains low-rank adapter weights while the base model weights remain frozen, reducing trainable parameters and memory use.",
+              "locator": "paper:LoRA-method-and-parameter-efficiency"
+            }
+          ]
+        },
+        {
+          "key": "claim-002",
+          "text": "Full fine-tuning can offer maximum task-specific flexibility but requires substantially more optimizer state, memory, and checkpoint storage.",
+          "confidence": 0.91,
+          "evidence": [
+            {
+              "source_index": 0,
+              "kind": "quote",
+              "quote_or_summary": "Full fine-tuning updates all base model weights and requires more optimizer state, memory, and checkpoint storage.",
+              "locator": "paper:comparison-and-efficiency-discussion"
+            }
+          ]
+        },
+        {
+          "key": "claim-003",
+          "text": "The recommendation should include task-fit caveats, such as possible quality differences, adapter management overhead, and the need to validate on the target evaluation set.",
+          "confidence": 0.9,
+          "evidence": [
+            {
+              "source_index": 1,
+              "kind": "summary",
+              "quote_or_summary": "The task-specific comparison table shows that adaptation quality can differ by task and model; a parameter-efficient method should be validated on the target evaluation set.",
+              "locator": "benchmark:task-specific-comparison-table"
+            },
+            {
+              "source_index": 2,
+              "kind": "summary",
+              "quote_or_summary": "Adapter deployment guidance covers adapter management overhead, serving configuration, and validation on the target evaluation set.",
+              "locator": "documentation:adapter-deployment-guidance"
+            }
+          ]
+        },
+        {
+          "key": "unsupported-002",
+          "source_index": 0,
+          "text": "The fixture contains an unsupported claim about LoRA always matching full fine-tuning.",
+          "confidence": 0.2,
+          "evidence": []
+        }
+      ]
+    },
+    "ai-tech-003": {
+      "sources": [
+        {
+          "source_type": "document",
+          "eval_source_type": "documentation",
+          "title": "Python tomllib Documentation",
+          "locator": "fixture://phase1/ai-tech-003/tomllib-docs",
+          "publisher": "Fixture documentation corpus",
+          "content": "The tomllib module reads TOML data. tomllib.load reads TOML from a binary file object, and tomllib.loads parses a string. The module is intended for parsing TOML configuration files."
+        },
+        {
+          "source_type": "document",
+          "eval_source_type": "release_notes",
+          "title": "Python 3.11 Release Notes",
+          "locator": "fixture://phase1/ai-tech-003/python-311-release-notes",
+          "publisher": "Fixture release-note corpus",
+          "content": "Python 3.11 release notes: tomllib was added to the standard library in Python 3.11."
+        }
+      ],
+      "claims": [
+        {
+          "key": "claim-001",
+          "text": "The `tomllib` module was added to the Python standard library in Python 3.11.",
+          "confidence": 0.99,
+          "evidence": [
+            {
+              "source_index": 0,
+              "kind": "summary",
+              "quote_or_summary": "The tomllib module reads TOML data.",
+              "locator": "documentation:Python-tomllib-module-documentation"
+            },
+            {
+              "source_index": 1,
+              "kind": "quote",
+              "quote_or_summary": "Python 3.11 release notes: tomllib was added to the standard library in Python 3.11.",
+              "locator": "release_notes:Python-3.11-release-notes"
+            }
+          ]
+        },
+        {
+          "key": "claim-002",
+          "text": "`tomllib` reads TOML data and supports parsing TOML configuration files in binary mode.",
+          "confidence": 0.97,
+          "evidence": [
+            {
+              "source_index": 0,
+              "kind": "summary",
+              "quote_or_summary": "The tomllib module reads TOML data. tomllib.load reads TOML from a binary file object, and tomllib.loads parses a string. The module is intended for parsing TOML configuration files.",
+              "locator": "documentation:tomllib-load-and-loads"
+            }
+          ]
+        },
+        {
+          "key": "unsupported-003",
+          "source_index": 0,
+          "text": "The fixture contains an unsupported claim that tomllib writes TOML files.",
+          "confidence": 0.1,
+          "evidence": []
+        }
+      ]
+    },
+    "ai-tech-004": {
+      "sources": [
+        {
+          "source_type": "document",
+          "eval_source_type": "documentation",
+          "title": "Vector ANN Index Documentation",
+          "locator": "fixture://phase1/ai-tech-004/vector-ann-docs",
+          "publisher": "Fixture documentation corpus",
+          "content": "Approximate nearest neighbor vector indexes retrieve semantically similar embeddings. They trade exactness or recall for faster search over high-dimensional vectors."
+        },
+        {
+          "source_type": "paper",
+          "eval_source_type": "paper",
+          "title": "BM25 Retrieval Reference",
+          "locator": "fixture://phase1/ai-tech-004/bm25-paper",
+          "publisher": "Fixture paper corpus",
+          "content": "BM25 is a probabilistic retrieval function that ranks documents using lexical term matching, term frequency, and document statistics rather than embedding distance."
+        },
+        {
+          "source_type": "document",
+          "eval_source_type": "documentation",
+          "title": "BM25 Search Documentation",
+          "locator": "fixture://phase1/ai-tech-004/bm25-docs",
+          "publisher": "Fixture documentation corpus",
+          "content": "Search engine BM25 ranking uses lexical term statistics and matches query tokens; it does not calculate embedding similarity."
+        },
+        {
+          "source_type": "document",
+          "eval_source_type": "benchmark",
+          "title": "Hybrid Retrieval Evaluation",
+          "locator": "fixture://phase1/ai-tech-004/hybrid-benchmark",
+          "publisher": "Fixture benchmark corpus",
+          "content": "The retrieval comparison shows complementary lexical and semantic behavior. Hybrid retrieval or reranking can help when queries mix semantic intent with exact identifiers."
+        }
+      ],
+      "claims": [
+        {
+          "key": "claim-001",
+          "text": "Approximate nearest neighbor vector indexes retrieve semantically similar embeddings and trade exactness for faster search over high-dimensional vectors.",
+          "confidence": 0.94,
+          "evidence": [
+            {
+              "source_index": 0,
+              "kind": "summary",
+              "quote_or_summary": "Approximate nearest neighbor vector indexes retrieve semantically similar embeddings. They trade exactness or recall for faster search over high-dimensional vectors.",
+              "locator": "documentation:vector-index-and-ANN-tradeoff"
+            }
+          ]
+        },
+        {
+          "key": "claim-002",
+          "text": "BM25 keyword search ranks documents using lexical term matching and term statistics rather than embedding distance.",
+          "confidence": 0.96,
+          "evidence": [
+            {
+              "source_index": 1,
+              "kind": "summary",
+              "quote_or_summary": "BM25 is a probabilistic retrieval function that ranks documents using lexical term matching, term frequency, and document statistics rather than embedding distance.",
+              "locator": "paper:BM25-and-probabilistic-retrieval-reference"
+            },
+            {
+              "source_index": 2,
+              "kind": "summary",
+              "quote_or_summary": "Search engine BM25 ranking uses lexical term statistics and matches query tokens; it does not calculate embedding similarity.",
+              "locator": "documentation:BM25-ranking-behavior"
+            }
+          ]
+        },
+        {
+          "key": "claim-003",
+          "text": "For retrieval-augmented generation, vector and BM25 search have complementary failure modes, so hybrid retrieval or reranking may be appropriate when queries mix semantic and exact-token needs.",
+          "confidence": 0.89,
+          "evidence": [
+            {
+              "source_index": 3,
+              "kind": "summary",
+              "quote_or_summary": "The retrieval comparison shows complementary lexical and semantic behavior. Hybrid retrieval or reranking can help when queries mix semantic intent with exact identifiers.",
+              "locator": "benchmark:retrieval-comparison-and-hybrid-evaluation"
+            }
+          ]
+        },
+        {
+          "key": "unsupported-004",
+          "source_index": 0,
+          "text": "The fixture contains an unsupported claim that vector search is strictly better for every RAG query.",
+          "confidence": 0.15,
+          "evidence": []
+        }
+      ]
+    },
+    "ai-tech-005": {
+      "sources": [
+        {
+          "source_type": "document",
+          "eval_source_type": "release_notes",
+          "title": "Kubernetes Stable Release Notes",
+          "locator": "fixture://phase1/ai-tech-005/kubernetes-release-notes",
+          "publisher": "Fixture release-note corpus",
+          "content": "Kubernetes stable release evidence for the answer date identifies the current stable version and its release date."
+        },
+        {
+          "source_type": "document",
+          "eval_source_type": "release_notes",
+          "title": "Docker Engine Stable Release Notes",
+          "locator": "fixture://phase1/ai-tech-005/docker-release-notes",
+          "publisher": "Fixture release-note corpus",
+          "content": "Docker Engine stable release evidence for the answer date identifies the current stable version and its release date."
+        },
+        {
+          "source_type": "document",
+          "eval_source_type": "documentation",
+          "title": "Kubernetes Upgrade Compatibility Guidance",
+          "locator": "fixture://phase1/ai-tech-005/kubernetes-compatibility",
+          "publisher": "Fixture documentation corpus",
+          "content": "Kubernetes upgrade guidance requires checking API removals and deprecations, networking, storage, and supported version skew before an upgrade."
+        },
+        {
+          "source_type": "document",
+          "eval_source_type": "documentation",
+          "title": "Docker Engine Compatibility Guidance",
+          "locator": "fixture://phase1/ai-tech-005/docker-compatibility",
+          "publisher": "Fixture documentation corpus",
+          "content": "Docker Engine upgrade guidance requires checking container runtime behavior and compatibility notes before an upgrade."
+        }
+      ],
+      "claims": [
+        {
+          "key": "claim-001",
+          "text": "The answer identifies the current stable Kubernetes release as of the answer date and cites official Kubernetes release evidence.",
+          "confidence": 0.9,
+          "evidence": [
+            {
+              "source_index": 0,
+              "kind": "summary",
+              "quote_or_summary": "Kubernetes stable release evidence for the answer date identifies the current stable version and its release date.",
+              "locator": "release_notes:official-Kubernetes-release-page-and-changelog"
+            }
+          ]
+        },
+        {
+          "key": "claim-002",
+          "text": "The answer identifies the current stable Docker Engine release as of the answer date and cites official Docker release evidence.",
+          "confidence": 0.9,
+          "evidence": [
+            {
+              "source_index": 1,
+              "kind": "summary",
+              "quote_or_summary": "Docker Engine stable release evidence for the answer date identifies the current stable version and its release date.",
+              "locator": "release_notes:official-Docker-Engine-release-notes"
+            }
+          ]
+        },
+        {
+          "key": "claim-003",
+          "text": "The upgrade plan checks compatibility risks for Kubernetes API removals or deprecations, container runtime behavior, networking, storage, and supported version skew.",
+          "confidence": 0.92,
+          "evidence": [
+            {
+              "source_index": 2,
+              "kind": "summary",
+              "quote_or_summary": "Kubernetes upgrade guidance requires checking API removals and deprecations, networking, storage, and supported version skew before an upgrade.",
+              "locator": "documentation:Kubernetes-version-skew-and-deprecation-guidance"
+            },
+            {
+              "source_index": 3,
+              "kind": "summary",
+              "quote_or_summary": "Docker Engine upgrade guidance requires checking container runtime behavior and compatibility notes before an upgrade.",
+              "locator": "documentation:Docker-Engine-upgrade-compatibility-guidance"
+            }
+          ]
+        },
+        {
+          "key": "unsupported-005",
+          "source_index": 0,
+          "text": "The fixture contains an unsupported claim that the latest releases are safe to deploy without compatibility checks.",
+          "confidence": 0.1,
+          "evidence": []
+        }
+      ]
+    }
+  }
+}

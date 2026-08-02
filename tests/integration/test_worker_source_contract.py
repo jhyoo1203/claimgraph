@@ -37,6 +37,8 @@ def test_runtime_snapshot_projects_to_metadata_only_source_artifact() -> None:
         "created_at": retrieved_at.isoformat(),
         "producer": {"name": "claimgraph-worker", "version": "0.1.0"},
         "input_hash": content_hash_for("question"),
+        "model": "source-snapshot-adapter",
+        "prompt_version": "source-snapshot-adapter@1",
         "body": snapshot.to_source_artifact_body(),
     }
     schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))

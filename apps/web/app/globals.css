@@ -651,11 +651,8 @@ code {
 
 .claim-label {
   color: var(--quiet);
-  font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .status-badge {
@@ -729,6 +726,37 @@ code {
   margin-top: 12px;
   color: var(--quiet);
   font-size: 11px;
+}
+
+.technical-details {
+  margin-top: 10px;
+  color: var(--quiet);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.technical-details summary {
+  width: fit-content;
+  cursor: pointer;
+  color: var(--quiet);
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.technical-details summary:hover {
+  color: var(--accent);
+}
+
+.technical-details code {
+  display: block;
+  margin-top: 5px;
+  overflow-wrap: anywhere;
+  color: var(--quiet);
+  font-size: 10px;
+}
+
+.report-technical-details {
+  margin-top: 14px;
 }
 
 .claim-meta code,
@@ -805,6 +833,8 @@ code {
 .source-label {
   color: var(--quiet);
   font-size: 9px;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .evidence-source strong {
