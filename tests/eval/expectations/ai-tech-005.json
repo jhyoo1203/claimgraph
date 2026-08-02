@@ -1,0 +1,52 @@
+{
+  "question_id": "ai-tech-005",
+  "expectation_version": "2026-08-02",
+  "expected_claims": [
+    {
+      "id": "claim-001",
+      "text": "The answer identifies the current stable Kubernetes release as of the answer date and cites official Kubernetes release evidence.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "release_notes",
+          "required_locator": "official Kubernetes release page, changelog, or release notes",
+          "must_support": "current stable version and release date"
+        }
+      ]
+    },
+    {
+      "id": "claim-002",
+      "text": "The answer identifies the current stable Docker Engine release as of the answer date and cites official Docker release evidence.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "release_notes",
+          "required_locator": "official Docker Engine release notes",
+          "must_support": "current stable version and release date"
+        }
+      ]
+    },
+    {
+      "id": "claim-003",
+      "text": "The upgrade plan checks compatibility risks for Kubernetes API removals or deprecations, container runtime behavior, networking, storage, and supported version skew.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "documentation",
+          "required_locator": "Kubernetes version-skew, deprecation, or upgrade documentation",
+          "must_support": "API, component, or version compatibility constraints"
+        },
+        {
+          "source_type": "documentation",
+          "required_locator": "Docker Engine upgrade or compatibility documentation",
+          "must_support": "engine upgrade risks or compatibility notes"
+        }
+      ]
+    }
+  ],
+  "unsupported_if": [
+    "The answer provides version numbers without an explicit answer date.",
+    "The answer uses unofficial mirrors or stale third-party summaries when official release notes are available.",
+    "The answer treats the latest version as safe to deploy without checking compatibility and deprecation evidence."
+  ]
+}

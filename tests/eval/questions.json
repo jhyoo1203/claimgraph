@@ -1,0 +1,182 @@
+[
+  {
+    "id": "ai-tech-001",
+    "question": "What did the original Transformer paper introduce, and how did its sequence modeling approach differ from recurrent encoder-decoder models?",
+    "difficulty": "deterministic",
+    "source_types": ["paper"],
+    "has_conflict": false,
+    "time_sensitive": false,
+    "phase1_candidate": true
+  },
+  {
+    "id": "ai-tech-002",
+    "question": "For a team adapting a large language model with limited GPU memory, when is LoRA preferable to full fine-tuning, and what tradeoffs should be cited?",
+    "difficulty": "intermediate",
+    "source_types": ["paper", "documentation", "benchmark"],
+    "has_conflict": false,
+    "time_sensitive": false,
+    "phase1_candidate": true
+  },
+  {
+    "id": "ai-tech-003",
+    "question": "Which Python version first introduced the `tomllib` standard library module, and what format is it intended to read?",
+    "difficulty": "deterministic",
+    "source_types": ["documentation", "release_notes"],
+    "has_conflict": false,
+    "time_sensitive": false,
+    "phase1_candidate": true
+  },
+  {
+    "id": "ai-tech-004",
+    "question": "What are the main architectural differences between vector search with approximate nearest neighbor indexes and keyword search with BM25 for retrieval-augmented generation?",
+    "difficulty": "intermediate",
+    "source_types": ["documentation", "paper", "benchmark"],
+    "has_conflict": false,
+    "time_sensitive": false,
+    "phase1_candidate": true
+  },
+  {
+    "id": "ai-tech-005",
+    "question": "As of the answer date, what are the current stable releases of Kubernetes and Docker Engine, and what compatibility risks should an upgrade plan check?",
+    "difficulty": "advanced",
+    "source_types": ["documentation", "release_notes"],
+    "has_conflict": false,
+    "time_sensitive": true,
+    "phase1_candidate": true
+  },
+  {
+    "id": "ai-tech-006",
+    "question": "What evidence supports or challenges the claim that retrieval-augmented generation reduces hallucinations in enterprise question answering?",
+    "difficulty": "advanced",
+    "source_types": ["paper", "benchmark", "case_study"],
+    "has_conflict": true,
+    "time_sensitive": false,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-007",
+    "question": "How do speculative decoding techniques improve LLM serving latency, and what assumptions must hold for the speedup to appear?",
+    "difficulty": "advanced",
+    "source_types": ["paper", "benchmark", "documentation"],
+    "has_conflict": false,
+    "time_sensitive": false,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-008",
+    "question": "Which browser engines currently support WebGPU by default, and what fallback should a web ML application provide?",
+    "difficulty": "intermediate",
+    "source_types": ["documentation", "compatibility_table", "release_notes"],
+    "has_conflict": false,
+    "time_sensitive": true,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-009",
+    "question": "What are the privacy and accuracy tradeoffs between on-device speech recognition and cloud speech recognition for mobile applications?",
+    "difficulty": "intermediate",
+    "source_types": ["documentation", "benchmark", "policy"],
+    "has_conflict": true,
+    "time_sensitive": false,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-010",
+    "question": "What does the Model Context Protocol define, and how does it differ from directly hard-coding tool integrations into an agent?",
+    "difficulty": "introductory",
+    "source_types": ["documentation", "specification"],
+    "has_conflict": false,
+    "time_sensitive": true,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-011",
+    "question": "For PostgreSQL-backed semantic search, when should pgvector HNSW indexes be preferred over exact vector scans?",
+    "difficulty": "intermediate",
+    "source_types": ["documentation", "benchmark"],
+    "has_conflict": false,
+    "time_sensitive": true,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-012",
+    "question": "What is the difference between passkeys and traditional password plus TOTP authentication, and what adoption constraints should be considered?",
+    "difficulty": "intermediate",
+    "source_types": ["specification", "documentation", "security_guidance"],
+    "has_conflict": false,
+    "time_sensitive": false,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-013",
+    "question": "What are the current best-supported ways to run quantized LLM inference on Apple Silicon, and what quality or performance caveats apply?",
+    "difficulty": "advanced",
+    "source_types": ["documentation", "benchmark", "release_notes"],
+    "has_conflict": true,
+    "time_sensitive": true,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-014",
+    "question": "How do OpenTelemetry traces, metrics, and logs complement each other when debugging distributed AI services?",
+    "difficulty": "introductory",
+    "source_types": ["documentation", "specification"],
+    "has_conflict": false,
+    "time_sensitive": false,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-015",
+    "question": "What are the main technical reasons an LLM agent workflow might require durable execution instead of a single request-response call?",
+    "difficulty": "intermediate",
+    "source_types": ["documentation", "case_study"],
+    "has_conflict": false,
+    "time_sensitive": false,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-016",
+    "question": "Which claims about chain-of-thought prompting are supported by published research, and which require caution because of faithfulness concerns?",
+    "difficulty": "advanced",
+    "source_types": ["paper", "benchmark"],
+    "has_conflict": true,
+    "time_sensitive": false,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-017",
+    "question": "How do WebAssembly and containers differ as deployment units for sandboxed untrusted code execution?",
+    "difficulty": "intermediate",
+    "source_types": ["documentation", "security_guidance", "benchmark"],
+    "has_conflict": false,
+    "time_sensitive": false,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-018",
+    "question": "What are the main risks of evaluating code-generating models only with pass@k benchmark scores?",
+    "difficulty": "advanced",
+    "source_types": ["paper", "benchmark"],
+    "has_conflict": false,
+    "time_sensitive": false,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-019",
+    "question": "As of the answer date, what major changes in the latest stable Node.js LTS release affect backend service maintainers?",
+    "difficulty": "intermediate",
+    "source_types": ["documentation", "release_notes"],
+    "has_conflict": false,
+    "time_sensitive": true,
+    "phase1_candidate": false
+  },
+  {
+    "id": "ai-tech-020",
+    "question": "What evidence should be collected before deciding whether to replace a relational database workflow with a graph database?",
+    "difficulty": "intermediate",
+    "source_types": ["documentation", "benchmark", "case_study"],
+    "has_conflict": true,
+    "time_sensitive": false,
+    "phase1_candidate": false
+  }
+]

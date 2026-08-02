@@ -1,0 +1,40 @@
+{
+  "question_id": "ai-tech-003",
+  "expectation_version": "2026-08-02",
+  "expected_claims": [
+    {
+      "id": "claim-001",
+      "text": "The `tomllib` module was added to the Python standard library in Python 3.11.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "documentation",
+          "required_locator": "Python `tomllib` module documentation",
+          "must_support": "module availability starting in Python 3.11"
+        },
+        {
+          "source_type": "release_notes",
+          "required_locator": "Python 3.11 release notes",
+          "must_support": "`tomllib` added to the standard library"
+        }
+      ]
+    },
+    {
+      "id": "claim-002",
+      "text": "`tomllib` reads TOML data and supports parsing TOML configuration files in binary mode.",
+      "status": "supported",
+      "evidence": [
+        {
+          "source_type": "documentation",
+          "required_locator": "`tomllib.load` or `tomllib.loads` documentation",
+          "must_support": "TOML parsing purpose and accepted input form"
+        }
+      ]
+    }
+  ],
+  "unsupported_if": [
+    "The answer gives a Python version other than 3.11.",
+    "The answer says `tomllib` writes TOML files as part of the standard library API.",
+    "The answer lacks Python documentation or release-note evidence."
+  ]
+}
