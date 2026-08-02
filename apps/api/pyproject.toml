@@ -10,3 +10,9 @@ dependencies = [
 
 [tool.uv]
 package = false
+
+[dependency-groups]
+dev = [
+  "jsonschema>=4.23",
+  "pytest>=8",
+]
