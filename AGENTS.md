@@ -116,7 +116,9 @@ Codex가 커밋할 때는 Conventional Commits를 사용한다.
 
 ### PR 작성 규칙
 
-- PR 제목과 본문은 한국어로 작성한다. Conventional Commit prefix를 사용할 때도 설명은 한국어로 작성한다.
+- PR 제목의 Conventional Commit type token은 `feat:`, `fix:`, `docs:`, `test:`, `chore:` 등 표준 영문을 그대로 유지한다. `기능:`, `수정:`, `문서:`처럼 type token을 한국어로 번역하지 않는다.
+- PR 제목의 설명 부분과 본문은 한국어로 작성한다.
+- 예: `feat: ResearchRun 생성·조회 API 계약 구현`, `docs: 웹 디자인 전략 정리`
 - PR 본문에는 변경 요약, 검증 결과, 설정·리스크를 포함한다.
 - PR 생성 시 assignee와 label을 빠뜨리지 않는다.
 
